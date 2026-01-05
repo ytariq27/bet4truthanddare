@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dare Masters - Truth or Dare Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: #fff;
+            min-height: 100vh;
+            padding-bottom: 40px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            text-align: center;
+            padding: 30px 0;
+            position: relative;
+        }
+        
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(45deg, #ff0080, #ff8c00);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 1.1rem;
+            color: #a0a0c0;
+            max-width: 600px;
+            margin: 0 auto 20px;
+            line-height: 1.5;
+        }
+        
+        .disclaimer {
+            background-color: rgba(255, 215, 0, 0.15);
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 20px auto;
+            max-width: 800px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ffd700;
+        }
+        
+        .main-content {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            margin-top: 30px;
+        }
+        
+        .game-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .payment-section {
+            flex: 1;
+            min-width: 300px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .section-title {
+            font-size: 1.6rem;
+            margin-bottom: 20px;
+            color: #6ee7b7;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-title i {
+            font-size: 1.8rem;
+        }
+        
+        .game-options {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .game-btn {
+            flex: 1;
+            padding: 18px 10px;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        
+        .truth-btn {
+            background: linear-gradient(135deg, #3498db, #2c77b5);
+            color: white;
+        }
+        
+        .dare-btn {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            color: white;
+        }
+        
+        .custom-dare-btn {
+            background: linear-gradient(135deg, #9b59b6, #8e44ad);
+            color: white;
+        }
+        
+        .game-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 7px 15px rgba(0, 0, 0, 0.4);
+        }
+        
+        .game-btn:active {
+            transform: translateY(0);
+        }
+        
+        .challenge-display {
+            background-color: rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            padding: 25px;
+            min-height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 25px;
+            border: 1px dashed rgba(255, 255, 255, 0.1);
+        }
+        
+        .challenge-text {
+            font-size: 1.4rem;
+            text-align: center;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+        
+        .challenge-type {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+        
+        .truth-type {
+            background-color: rgba(52, 152, 219, 0.3);
+            color: #3498db;
+        }
+        
+        .dare-type {
+            background-color: rgba(231, 76, 60, 0.3);
+            color: #e74c3c;
+        }
+        
+        .custom-challenge-input {
+            width: 100%;
+            padding: 15px;
+            border-radius: 10px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            font-size: 1rem;
+            margin-bottom: 20px;
+        }
+        
+        .custom-challenge-input::placeholder {
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        .payment-options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        
+        .payment-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+        
+        .payment-option:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .payment-option.selected {
+            border-color: #6ee7b7;
+            background-color: rgba(110, 231, 183, 0.1);
+        }
+        
+        .payment-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            font-size: 1.8rem;
+        }
+        
+        .bkash {
+            background-color: rgba(224, 0, 52, 0.2);
+            color: #e00034;
+        }
+        
+        .nagad {
+            background-color: rgba(0, 128, 0, 0.2);
+            color: #008000;
+        }
+        
+        .credit-card {
+            background-color: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+        }
+        
+        .payment-details {
+            font-size: 0.9rem;
+            color: #a0a0c0;
+        }
+        
+        .payment-form {
+            display: none;
+            margin-top: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #ccc;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+        }
+        
+        .pay-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #6ee7b7, #3b82f6);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+        
+        .pay-btn:hover {
+            background: linear-gradient(135deg, #5dd5a7, #2c6ee5);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        
+        .payment-success {
+            display: none;
+            text-align: center;
+            padding: 20px;
+            background-color: rgba(46, 204, 113, 0.2);
+            border-radius: 10px;
+            margin-top: 20px;
+            border: 1px solid rgba(46, 204, 113, 0.3);
+        }
+        
+        .success-icon {
+            font-size: 3rem;
+            color: #2ecc71;
+            margin-bottom: 15px;
+        }
+        
+        .fake-note {
+            background-color: rgba(255, 0, 0, 0.1);
+            border: 1px solid rgba(255, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 25px;
+            text-align: center;
+            font-size: 0.9rem;
+            color: #ff6b6b;
+        }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .main-content {
+                flex-direction: column;
+            }
+            
+            .game-options {
+                flex-direction: column;
+            }
+            
+            .logo {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">DARE MASTERS</div>
+            <p class="tagline">The ultimate truth or dare experience! Challenge your friends with hilarious truths and outrageous dares. For entertainment purposes only.</p>
+            <div class="disclaimer">
+                <i class="fas fa-exclamation-triangle"></i>Must be 18+ to play. Always play responsibly and never engage in dangerous or illegal activities.
+            </div>
+        </header>
+        
+        <div class="main-content">
+            <section class="game-section">
+                <h2 class="section-title"><i class="fas fa-gamepad"></i> Game Zone</h2>
+                
+                <div class="game-options">
+                    <button class="game-btn truth-btn" id="truthBtn">
+                        <i class="fas fa-comment-dots"></i>
+                        <span>Truth</span>
+                        <small>Reveal a secret</small>
+                    </button>
+                    <button class="game-btn dare-btn" id="dareBtn">
+                        <i class="fas fa-running"></i>
+                        <span>Dare</span>
+                        <small>Take a challenge</small>
+                    </button>
+                    <button class="game-btn custom-dare-btn" id="customDareBtn">
+                        <i class="fas fa-edit"></i>
+                        <span>Custom Dare</span>
+                        <small>Create your own</small>
+                    </button>
+                </div>
+                
+                <div class="challenge-display" id="challengeDisplay">
+                    <div id="challengeType" class="challenge-type truth-type">Truth</div>
+                    <div class="challenge-text" id="challengeText">Click on a button above to get your truth or dare challenge!</div>
+                </div>
+                
+                <div id="customDareSection" style="display: none;">
+                    <input type="text" class="custom-challenge-input" id="customDareInput" placeholder="Enter your custom dare challenge...">
+                    <button class="pay-btn" id="setCustomDareBtn">
+                        <i class="fas fa-check-circle"></i> Set Custom Dare
+                    </button>
+                </div>
+                
+                <div class="fake-note">
+                    <i class="fas fa-theater-masks"></i> Remember: This is just a game! All challenges are for fun and entertainment. Never do anything dangerous or illegal.
+                </div>
+            </section>
+            
+            <section class="payment-section">
+                <h2 class="section-title"><i class="fas fa-credit-card"></i> Payment Options</h2>
+                <p style="margin-bottom: 20px; color: #a0a0c0;">Select a payment method to unlock your challenge. <strong>This is a simulation - no real payment will be processed.</strong></p>
+                
+                <div class="payment-options">
+                    <div class="payment-option" id="bkashOption">
+                        <div class="payment-icon bkash">
+                            <i class="fas fa-mobile-alt"></i>
+                        </div>
+                        <div>
+                            <h3>Bkash</h3>
+                            <p class="payment-details">Pay via bKash mobile banking</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-option" id="nagadOption">
+                        <div class="payment-icon nagad">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div>
+                            <h3>Nagad</h3>
+                            <p class="payment-details">Pay via Nagad mobile banking</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-option" id="cardOption">
+                        <div class="payment-icon credit-card">
+                            <i class="far fa-credit-card"></i>
+                        </div>
+                        <div>
+                            <h3>Credit/Debit Card</h3>
+                            <p class="payment-details">Pay with Visa, Mastercard, or Amex</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="payment-form" id="bkashForm">
+                    <h3 style="margin-bottom: 15px; color: #e00034;">bKash Payment</h3>
+                    <div class="form-group">
+                        <label for="bkashNumber">bKash Number</label>
+                        <input type="text" id="bkashNumber" placeholder="01XXXXXXXXX" maxlength="11">
+                    </div>
+                    <div class="form-group">
+                        <label for="bkashPin">bKash PIN</label>
+                        <input type="password" id="bkashPin" placeholder="Enter 5-digit PIN" maxlength="5">
+                    </div>
+                    <button class="pay-btn" id="bkashPayBtn">
+                        <i class="fas fa-lock"></i> Pay 100 BDT via bKash
+                    </button>
+                </div>
+                
+                <div class="payment-form" id="nagadForm">
+                    <h3 style="margin-bottom: 15px; color: #008000;">Nagad Payment</h3>
+                    <div class="form-group">
+                        <label for="nagadNumber">Nagad Number</label>
+                        <input type="text" id="nagadNumber" placeholder="01XXXXXXXXX" maxlength="11">
+                    </div>
+                    <div class="form-group">
+                        <label for="nagadPin">Nagad PIN</label>
+                        <input type="password" id="nagadPin" placeholder="Enter 4-digit PIN" maxlength="4">
+                    </div>
+                    <button class="pay-btn" id="nagadPayBtn">
+                        <i class="fas fa-lock"></i> Pay 10 BDT via Nagad
+                    </button>
+                </div>
+                
+                <div class="payment-form" id="cardForm">
+                    <h3 style="margin-bottom: 15px; color: #3498db;">Card Payment</h3>
+                    <div class="form-group">
+                        <label for="cardNumber">Card Number</label>
+                        <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                    </div>
+                    <div class="form-group">
+                        <div style="display: flex; gap: 15px;">
+                            <div style="flex: 1;">
+                                <label for="expiryDate">Expiry Date</label>
+                                <input type="text" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                            </div>
+                            <div style="flex: 1;">
+                                <label for="cvv">CVV</label>
+                                <input type="password" id="cvv" placeholder="123" maxlength="3">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="pay-btn" id="cardPayBtn">
+                        <i class="fas fa-lock"></i> Pay 10 BDT via Card
+                    </button>
+                </div>
+                
+                <div class="payment-success" id="paymentSuccess">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h3>Payment Successful!</h3>
+                    <p>Your challenge has been unlocked. Enjoy the game!</p>
+                    <p style="margin-top: 10px; font-size: 0.9rem; color: #a0a0c0;">(This is a simulation - no actual payment was processed)</p>
+                </div>
+                
+                <div class="fake-note">
+                    <i class="fas fa-info-circle"></i> This is a simulated payment system for entertainment purposes only. No real transactions occur. Do not enter real payment information.
+                </div>
+            </section>
+        </div>
+        
+        <div class="footer">
+            <p>© 2023 Dare Masters. This is a fictional entertainment website. All challenges are meant for fun only.</p>
+            <p>No real money is exchanged. Always play responsibly.</p>
+        </div>
+    </div>
+
+    <script>
+        // Game data
+        const truths = [
+            "What's the most embarrassing thing you've ever done in front of a crush?",
+            "Have you ever pretended to like a gift you actually hated? What was it?",
+            "What's the biggest lie you've ever told to get out of trouble?",
+            "If you could swap lives with anyone for a day, who would it be and why?",
+            "What's the strangest dream you've ever had?",
+            "Have you ever cheated in a game or test? What happened?",
+            "What's the most childish thing you still do as an adult?",
+            "What's a secret you've never told anyone before?",
+            "If you had to delete one app from your phone forever, which would it be?",
+            "What's the weirdest food combination you actually enjoy?"
+        ];
+        
+        const dares = [
+            "Do your best impression of a famous celebrity for 30 seconds.",
+            "Let the person to your right post a status on your social media.",
+            "Sing the chorus of your favorite song at the top of your lungs.",
+            "Do 10 pushups right now, no exceptions!",
+            "Text your parent/caretaker 'I think I'm in love' and screenshot the response.",
+            "Put on a blindfold and let someone feed you a mystery food.",
+            "Speak in an accent for the next 10 minutes.",
+            "Let someone draw a mustache on your face with a marker.",
+            "Dance like nobody's watching for one full minute.",
+            "Call a friend and sing 'Happy Birthday' to them, even if it's not their birthday."
+        ];
+        
+        // DOM elements
+        const truthBtn = document.getElementById('truthBtn');
+        const dareBtn = document.getElementById('dareBtn');
+        const customDareBtn = document.getElementById('customDareBtn');
+        const challengeDisplay = document.getElementById('challengeDisplay');
+        const challengeText = document.getElementById('challengeText');
+        const challengeType = document.getElementById('challengeType');
+        const customDareSection = document.getElementById('customDareSection');
+        const customDareInput = document.getElementById('customDareInput');
+        const setCustomDareBtn = document.getElementById('setCustomDareBtn');
+        
+        const bkashOption = document.getElementById('bkashOption');
+        const nagadOption = document.getElementById('nagadOption');
+        const cardOption = document.getElementById('cardOption');
+        
+        const bkashForm = document.getElementById('bkashForm');
+        const nagadForm = document.getElementById('nagadForm');
+        const cardForm = document.getElementById('cardForm');
+        
+        const bkashPayBtn = document.getElementById('bkashPayBtn');
+        const nagadPayBtn = document.getElementById('nagadPayBtn');
+        const cardPayBtn = document.getElementById('cardPayBtn');
+        
+        const paymentSuccess = document.getElementById('paymentSuccess');
+        
+        // Game state
+        let currentChallengeType = 'truth';
+        let customDareActive = false;
+        let paymentSelected = false;
+        let selectedPaymentMethod = '';
+        
+        // Event Listeners for game buttons
+        truthBtn.addEventListener('click', () => {
+            if (!paymentSelected) {
+                alert('Please select a payment method first to unlock challenges!');
+                return;
+            }
+            
+            const randomTruth = truths[Math.floor(Math.random() * truths.length)];
+            challengeText.textContent = randomTruth;
+            challengeType.textContent = 'Truth';
+            challengeType.className = 'challenge-type truth-type';
+            currentChallengeType = 'truth';
+            customDareActive = false;
+            customDareSection.style.display = 'none';
+        });
+        
+        dareBtn.addEventListener('click', () => {
+            if (!paymentSelected) {
+                alert('Please select a payment method first to unlock challenges!');
+                return;
+            }
+            
+            const randomDare = dares[Math.floor(Math.random() * dares.length)];
+            challengeText.textContent = randomDare;
+            challengeType.textContent = 'Dare';
+            challengeType.className = 'challenge-type dare-type';
+            currentChallengeType = 'dare';
+            customDareActive = false;
+            customDareSection.style.display = 'none';
+        });
+        
+        customDareBtn.addEventListener('click', () => {
+            if (!paymentSelected) {
+                alert('Please select a payment method first to unlock challenges!');
+                return;
+            }
+            
+            customDareSection.style.display = 'block';
+            challengeText.textContent = 'Enter your custom dare challenge below!';
+            challengeType.textContent = 'Custom Dare';
+            challengeType.className = 'challenge-type dare-type';
+            currentChallengeType = 'dare';
+            customDareActive = true;
+        });
+        
+        setCustomDareBtn.addEventListener('click', () => {
+            const dareText = customDareInput.value.trim();
+            if (dareText.length < 5) {
+                alert('Please enter a dare challenge (at least 5 characters)');
+                return;
+            }
+            
+            challengeText.textContent = dareText;
+            customDareInput.value = '';
+            customDareSection.style.display = 'none';
+        });
+        
+        // Payment option selection
+        bkashOption.addEventListener('click', () => {
+            selectPaymentOption('bkash');
+            showPaymentForm('bkash');
+        });
+        
+        nagadOption.addEventListener('click', () => {
+            selectPaymentOption('nagad');
+            showPaymentForm('nagad');
+        });
+        
+        cardOption.addEventListener('click', () => {
+            selectPaymentOption('card');
+            showPaymentForm('card');
+        });
+        
+        function selectPaymentOption(method) {
+            // Remove selected class from all options
+            bkashOption.classList.remove('selected');
+            nagadOption.classList.remove('selected');
+            cardOption.classList.remove('selected');
+            
+            // Add selected class to clicked option
+            if (method === 'bkash') {
+                bkashOption.classList.add('selected');
+            } else if (method === 'nagad') {
+                nagadOption.classList.add('selected');
+            } else if (method === 'card') {
+                cardOption.classList.add('selected');
+            }
+            
+            selectedPaymentMethod = method;
+            paymentSelected = true;
+        }
+        
+        function showPaymentForm(method) {
+            // Hide all forms
+            bkashForm.style.display = 'none';
+            nagadForm.style.display = 'none';
+            cardForm.style.display = 'none';
+            paymentSuccess.style.display = 'none';
+            
+            // Show selected form
+            if (method === 'bkash') {
+                bkashForm.style.display = 'block';
+            } else if (method === 'nagad') {
+                nagadForm.style.display = 'block';
+            } else if (method === 'card') {
+                cardForm.style.display = 'block';
+            }
+        }
+        
+        // Payment simulation
+        bkashPayBtn.addEventListener('click', simulatePayment);
+        nagadPayBtn.addEventListener('click', simulatePayment);
+        cardPayBtn.addEventListener('click', simulatePayment);
+        
+        function simulatePayment() {
+            // Hide all forms
+            bkashForm.style.display = 'none';
+            nagadForm.style.display = 'none';
+            cardForm.style.display = 'none';
+            
+            // Show success message
+            paymentSuccess.style.display = 'block';
+            
+            // Enable game buttons
+            setTimeout(() => {
+                // Auto-select a random challenge after payment
+                const randomChallengeType = Math.random() > 0.5 ? 'truth' : 'dare';
+                
+                if (randomChallengeType === 'truth') {
+                    const randomTruth = truths[Math.floor(Math.random() * truths.length)];
+                    challengeText.textContent = randomTruth;
+                    challengeType.textContent = 'Truth';
+                    challengeType.className = 'challenge-type truth-type';
+                } else {
+                    const randomDare = dares[Math.floor(Math.random() * dares.length)];
+                    challengeText.textContent = randomDare;
+                    challengeType.textContent = 'Dare';
+                    challengeType.className = 'challenge-type dare-type';
+                }
+                
+                // Show a small celebration
+                challengeDisplay.style.border = '2px solid #6ee7b7';
+                challengeDisplay.style.boxShadow = '0 0 20px rgba(110, 231, 183, 0.3)';
+                setTimeout(() => {
+                    challengeDisplay.style.border = '1px dashed rgba(255, 255, 255, 0.1)';
+                    challengeDisplay.style.boxShadow = 'none';
+                }, 2000);
+            }, 1500);
+        }
+        
+        // Initialize with a default state
+        window.addEventListener('DOMContentLoaded', () => {
+            // Select bKash by default
+            selectPaymentOption('bkash');
+            showPaymentForm('bkash');
+            
+            // Format card number input
+            document.getElementById('cardNumber').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                let formatted = value.replace(/(\d{4})/g, '$1 ').trim();
+                e.target.value = formatted.substring(0, 19);
+            });
+            
+            // Format expiry date input
+            document.getElementById('expiryDate').addEventListener('input', function(e) {
+                let value = e.target.value.replace(/\s+/g, '').replace(/[^0-9]/gi, '');
+                if (value.length >= 2) {
+                    value = value.substring(0, 2) + '/' + value.substring(2, 4);
+                }
+                e.target.value = value.substring(0, 5);
+            });
+            
+            // Prevent real form submission
+            document.querySelectorAll('input').forEach(input => {
+                input.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        simulatePayment();
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
